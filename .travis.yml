@@ -1,0 +1,7 @@
+language: python
+services:
+  - docker
+script:
+- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+- docker build -t $DOCKER_USERNAME/echo:$TRAVIS_BRANCH-$TRAVIS_BUILD_ID .
+- docker push $DOCKER_USERNAME/echo:$TRAVIS_BRANCH-$TRAVIS_BUILD_ID
